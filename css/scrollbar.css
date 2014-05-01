@@ -1,0 +1,41 @@
+::-webkit-scrollbar{
+  width:8px;
+  height:5%; /* no effect */
+}
+#wrap::-webkit-scrollbar,
+#posWrap::-webkit-scrollbar {
+  display: none;
+}
+#channel::-webkit-scrollbar,
+#songList::-webkit-scrollbar {
+  display: none;
+}
+
+.noScroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+::-webkit-scrollbar-button:vertical {
+  display:none;
+}
+::-webkit-scrollbar-track:vertical {
+  background-color:black; /* no effect */
+}
+::-webkit-scrollbar-track-piece {
+  background:#F7F7F7;
+}
+::-webkit-scrollbar-thumb:vertical {
+  background-color:#D4D5D7;
+  border-radius:5px;
+  height: 10%; /* no effect */
+ }
+::-webkit-scrollbar-thumb:vertical:hover {
+  background-color:#AFAFAF;
+}
+::-webkit-scrollbar-corner:vertical {
+  background-color:#535353; /* no effect */
+}
+::-webkit-scrollbar-resizer:vertical {
+  background-color:#FF6E00;
+}
