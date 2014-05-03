@@ -28,7 +28,7 @@ node-webkit-doubanfm
 
 点击nw.exe即可运行node-webkit客户端
 
-应有同学的想法,已经压缩了一个**[exe文件](http://pan.baidu.com/s/1o60mlIy)**node-webkit的,打开就可以听啦~
+应有同学的想法,已经压缩了一个 **[exe文件](http://pan.baidu.com/s/1o60mlIy)** node-webkit的,打开就可以听啦~
 
 欢迎大家在issue上提修改意见.或者邮箱cquptzw[at]google.com联系~
 
