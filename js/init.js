@@ -130,13 +130,24 @@ function likeSong(sid,channel,isLike){
       console.log(JSON.parse(body));
     });
 }
-
+bindPlay.refresh = function(){
+  var pre = bindPlay.pre;
+  var playing = {
+    'audio': pre.find('audio')[0],
+    'a_btn': pre.find('.play-btn'),
+    'img': pre.find('.list-pic')
+  };
+  playing['audio'].pause();
+  playing['audio'].currentTime = 0;
+  playing['a_btn'].data('status',false).text('播放');
+  playing['img'].removeClass('playing_pic');
+}
 
 bindPlay.isNeedTurn = true;  //在点击喜欢的时候防止登录跳转
+bindPlay.pre = null;
 function bindPlay(){
   var btnWrap = $('#songList');
   var isCommented = false;
-  var pre = null;
   //绑定自动播放下一首(加载新元素后解绑之后重新绑定是因为ended事件没有实现事件冒泡)
   $('#songList audio').off('ended');
   $('#songList audio').on('ended',function(){
@@ -183,13 +194,13 @@ function bindPlay(){
       // $this.siblings('audio').on('ended',function(){
       //   $this.parents('.list-cnt').siblings('img').removeClass('playing_pic pauseing_pic');
       // });
-      if(pre != null && pre[0] != $this.parents('li')[0]) {
+      if(bindPlay.pre != null && bindPlay.pre[0] != $this.parents('li')[0]) {
         isCommented = false;
-        pre.find('img').removeClass('playing_pic pauseing_pic');
-        pre.find('.play-btn').data('status',false).text('播放');
-        pre.find('audio')[0].pause();
+        bindPlay.pre.find('img').removeClass('playing_pic pauseing_pic');
+        bindPlay.pre.find('.play-btn').data('status',false).text('播放');
+        bindPlay.pre.find('audio')[0].pause();
       }
-      pre = $this.parents('li');
+      bindPlay.pre = $this.parents('li');
       if($this.parent().siblings('img').hasClass('pauseing_pic')) {
         $this.parent().siblings('img').removeClass('pauseing_pic');
       }else {
@@ -581,6 +592,7 @@ function heartPlay(){
   }
 
   function turnRed(){
+    bindPlay.refresh();
     var channelsAudios =  $('#songList audio');
     for(var i=0,len = channelsAudios.length;i<len;i++) {
       channelsAudios[i].pause();
