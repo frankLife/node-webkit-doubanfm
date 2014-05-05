@@ -132,6 +132,9 @@ function likeSong(sid,channel,isLike){
 }
 bindPlay.refresh = function(){
   var pre = bindPlay.pre;
+  if(bindPlay.pre == null) {
+    return;
+  }
   var playing = {
     'audio': pre.find('audio')[0],
     'a_btn': pre.find('.play-btn'),
@@ -462,7 +465,7 @@ function heartPlay(){
         return;
       }
     }
-    //清楚之前点击过播放的音乐按钮状态
+    //清除之前点击过播放的音乐按钮状态
     preLi.find('.play_btn').attr('src','./img/play.png').removeClass('playing');
     var $this = $(this);
     var selfOffset = $this.offset();
@@ -488,15 +491,7 @@ function heartPlay(){
                               'top': 0
                             });
                             $('#heartPlay audio').attr('src',$play.attr('data-mp3'))[0].play();
-                            $('#heartPlay audio').one('play',function(){
-                                                    $play.removeClass('pauseing_pic');
-                                                    $('#heartPlay .play_edg').removeClass('pauseing_pic');
-                                                 })
-                                                 .one('pause',function(){
-                                                    $play.addClass('pauseing_pic');
-                                                    $('#heartPlay .play_edg').addClass('pauseing_pic');
-                                                 })//自动加载下一首
-                                                 .one('ended',function(){
+                            $('#heartPlay audio').one('ended',function(){
                                                     if($this.next().index() >= $('#myHeart li').length-3) {
                                                       getRedSongs(Login.self['user_id'],Login.self['expire'],Login.self['token']);
                                                     }
@@ -509,7 +504,14 @@ function heartPlay(){
     preLi = $this.find('.play_btn').attr('src','./img/pause.png').addClass('playing').end();
 
   });
-
+  $('#heartPlay audio').on('play',function(){
+      preLi.find('.play_btn').attr('src','./img/pause.png');
+      $(this).siblings('img').removeClass('pauseing_pic');
+  })
+  .on('pause',function(){
+      preLi.find('.play_btn').attr('src','./img/play.png');
+      $(this).siblings('img').addClass('pauseing_pic');
+   })
 }
   Login.isLogin = false;
   Login.isLoad = true;
