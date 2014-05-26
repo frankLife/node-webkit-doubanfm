@@ -250,7 +250,7 @@ function bindGetSong(){
   });
 }
 
-getChannel();
+//getChannel();
 function getChannel() {
   var data = null;
   request.get('http://www.douban.com/j/app/radio/channels',
@@ -265,6 +265,7 @@ function getChannel() {
       console.log('get channels err');
       return;
     }
+    //console.log(body);
     body = JSON.parse(body);
     var _resInfo = _.clone(body).channels;
     var listWrap = $('#channel');
