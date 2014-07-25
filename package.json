@@ -6,7 +6,7 @@
     "icon": "favicon.ico",
     "show": true,
     "position": "center",
-    "toolbar": false,
+    "toolbar": true,
     "frame": true,
     "min_width": 850,
     "min_height": 600,
